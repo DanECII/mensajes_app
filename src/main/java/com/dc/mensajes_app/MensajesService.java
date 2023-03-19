@@ -1,5 +1,6 @@
 package com.dc.mensajes_app;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,7 +19,16 @@ public class MensajesService {
         registro.setAutor_mensaje(nombre);
         MensajesDAO.crearMensajeDB(registro);
     }
-    public static void listarMensajes(){}
+    public static void listarMensajes(){
+        ArrayList<Mensajes> mensajes = MensajesDAO.leerMensajesDB();
+        mensajes.forEach((mensaje) -> {
+            System.out.println("ID: " + mensaje.id_mensaje);
+            System.out.println("Mensaje: " + mensaje.mensaje);
+            System.out.println("Autor: " + mensaje.autor_mensaje);
+            System.out.println("Fecha: " + mensaje.fecha_mensaje);
+        });
+        
+    }
     public static void borrarMensaje(){}
     public static void editarMensaje(){}
 }

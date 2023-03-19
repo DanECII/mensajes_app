@@ -2,7 +2,9 @@ package com.dc.mensajes_app;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +17,7 @@ public class MensajesDAO {
         Conexion db_connect = new Conexion();
         
         try (Connection conexion = db_connect.get_connection()){
-            PreparedStatement ps = null;
+            PreparedStatement ps;
             
             try {
                 String query = "INSERT INTO mensajes (mensaje, autor_mensaje) VALUES (?, ?)";
@@ -32,8 +34,38 @@ public class MensajesDAO {
         }
     }
     
-    public static void leerMensajesDB(){
+    public static ArrayList<Mensajes> leerMensajesDB(){
+        Conexion db_connect = new Conexion();
         
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        ArrayList<Mensajes> mensajes = new ArrayList<>();
+        
+        try (Connection conexion = db_connect.get_connection()){
+            
+            String query = "SELECT * FROM mensajes";
+            ps = conexion.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Mensajes msjAuxiliar = new Mensajes();
+                
+                msjAuxiliar.setId_mensaje(rs.getInt("id_mensaje"));
+                msjAuxiliar.setMensaje(rs.getString("mensaje"));
+                msjAuxiliar.setAutor_mensaje(rs.getString("autor_mensaje"));
+                msjAuxiliar.setFecha_mensaje(rs.getString("fecha_mensaje"));
+                
+                mensajes.add(msjAuxiliar);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudieron recuperar los mensajes");
+            System.out.println(e);
+        }
+        
+        return mensajes;
     }
     
     public static void borrarMensajesDB(int id_mensaje){

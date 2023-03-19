@@ -12,7 +12,7 @@ public class Inicio {
         
         Scanner sc = new Scanner(System.in);
 
-        int opcion = 0;
+        int opcion;
         
         do{
             System.out.println("------------------------------------------");
@@ -26,20 +26,11 @@ public class Inicio {
             opcion = sc.nextInt();
             
             switch(opcion){
-                case 1:
-                    MensajesService.crearMensaje();
-                    break;
-                case 2:
-                    MensajesService.listarMensajes();
-                    break;
-                case 3:
-                    MensajesService.editarMensaje();
-                    break;
-                case 4:
-                    MensajesService.borrarMensaje();
-                    break;
-                default:
-                    break;
+                case 1 -> MensajesService.crearMensaje();
+                case 2 -> MensajesService.listarMensajes();
+                case 3 -> MensajesService.editarMensaje();
+                case 4 -> MensajesService.borrarMensaje();
+                default -> System.exit(0);
             }
             
         }while(opcion != 0);
