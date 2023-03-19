@@ -1,6 +1,5 @@
 package com.dc.mensajes_app;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 /**
