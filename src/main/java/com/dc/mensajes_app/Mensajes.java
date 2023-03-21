@@ -5,10 +5,10 @@ package com.dc.mensajes_app;
  * @author Administrador
  */
 public class Mensajes {
-    int id_mensaje;
-    String mensaje;
-    String autor_mensaje;
-    String fecha_mensaje;
+    private int id_mensaje;
+    private String mensaje;
+    private String autor_mensaje;
+    private String fecha_mensaje;
 
     public Mensajes() {
     }
